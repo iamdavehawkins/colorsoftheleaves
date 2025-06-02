@@ -1,0 +1,681 @@
+/* Colors of the Leaves - Dave Hawkins
+   Warm, cozy autumn styling */
+
+:root {
+    /* Earth tone color palette */
+    --deep-red: #8B2E15;
+    --amber: #D9913D;
+    --gold: #D4A24E;
+    --soft-brown: #A67C52;
+    --pale-orange: #E8B282;
+    --muted-green: #7D8C5C;
+    --dark-brown: #5C4033;
+    --cream: #F5F0E6;
+    --text-color: #2A2118;
+    --bg-color: #F5F0E6;
+    --accent-color-1: #D9913D; /* amber */
+    --accent-color-2: #8B2E15; /* deep red */
+    --accent-color-3: #7D8C5C; /* muted green */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Libre Baskerville', serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Overlay textures */
+.autumn-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M30,10 Q50,0 70,10 T90,30 Q100,50 90,70 T70,90 Q50,100 30,90 T10,70 Q0,50 10,30 T30,10" fill="none" stroke="%23D9913D" stroke-width="0.5" opacity="0.1" /></svg>');
+    background-size: 300px 300px;
+    pointer-events: none;
+    opacity: 0.15;
+    z-index: -2;
+}
+
+.grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0"/></filter><rect width="200" height="200" filter="url(%23noise)" opacity="0.15"/></svg>');
+    pointer-events: none;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+/* Typography */
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 3.5rem;
+    text-align: center;
+    margin: 1.5rem 0;
+    color: var(--deep-red);
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 2rem;
+    text-align: center;
+    margin: 2rem 0 1.5rem;
+    color: var(--soft-brown);
+}
+
+/* Header */
+.site-header {
+    text-align: center;
+    padding: 2rem 0;
+    position: relative;
+}
+
+.dh-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+
+.dh-logo img {
+    width: 100px;
+    height: auto;
+}
+
+.jump-text {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: var(--cream);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.emoji-arrow {
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dh-logo:hover .jump-text,
+.dh-logo:hover .emoji-arrow {
+    opacity: 1;
+}
+
+.dh-logo:hover .emoji-arrow {
+    transform: translate(-5px, 5px);
+}
+
+.logo {
+    margin: 0 auto;
+    width: 250px;
+    height: 250px;
+    position: relative;
+}
+
+.album-art {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.album-art:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Intro section */
+.intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3rem 0;
+    position: relative;
+}
+
+.vinyl-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.vinyl {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Streaming links */
+.streaming-links {
+    margin: 4rem 0;
+    text-align: center;
+}
+
+.links-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 1.5rem;
+}
+
+.link-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--dark-brown);
+    color: var(--cream);
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.link-item:hover {
+    background-color: var(--deep-red);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Lyrics sections */
+.lyrics-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: rgba(245, 240, 230, 0.7);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.lyric-line {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    text-align: center;
+    line-height: 1.8;
+}
+
+.lyric-chorus {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 2;
+    margin: 2rem 0;
+}
+
+.lyrics-part-1, .lyrics-part-2, .lyrics-part-3, .lyrics-part-4 {
+    margin: 4rem 0;
+}
+
+/* Image breaks */
+.image-break {
+    margin: 4rem 0;
+    position: relative;
+}
+
+.image-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.visual-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.chorus-image {
+    max-height: 400px;
+    object-fit: cover;
+}
+
+/* Lyric fragments */
+.lyric-fragment {
+    position: absolute;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: rgba(245, 240, 230, 0.8);
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+}
+
+.fragment-left {
+    left: 30px;
+    bottom: 30px;
+}
+
+.fragment-right {
+    right: 30px;
+    bottom: 30px;
+}
+
+.fragment-center {
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+}
+
+/* Warm quotes */
+.warm-quote {
+    text-align: center;
+    margin: 3rem 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.8rem;
+    color: var(--deep-red);
+}
+
+/* Chorus section */
+.chorus-section {
+    margin: 5rem 0;
+    position: relative;
+}
+
+.chorus-container {
+    position: relative;
+}
+
+/* Video sections */
+.video-highlight, .video-acoustic {
+    margin: 5rem 0;
+    text-align: center;
+}
+
+.video-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.video-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: var(--soft-brown);
+}
+
+.video-container iframe {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Bandcamp button styling */
+.bandcamp-button-container {
+    max-width: 560px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.acoustic-description {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--soft-brown);
+}
+
+.bandcamp-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    background-color: var(--deep-red);
+    color: var(--cream);
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.bandcamp-button:hover {
+    background-color: var(--dark-brown);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.bandcamp-icon {
+    font-size: 1.4rem;
+    margin-right: 10px;
+}
+
+/* Newsletter form */
+.newsletter {
+    margin: 5rem 0;
+    text-align: center;
+}
+
+.newsletter-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: rgba(245, 240, 230, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.newsletter-form h3 {
+    color: var(--deep-red);
+    margin-bottom: 1rem;
+}
+
+.newsletter-form p {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.form-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
+
+.newsletter-form input[type="email"] {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--soft-brown);
+    border-radius: 5px;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+}
+
+.submit-btn {
+    padding: 12px 20px;
+    background-color: var(--deep-red);
+    color: var(--cream);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--dark-brown);
+}
+
+/* Footer */
+.site-footer {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    color: #999999;
+    font-size: 0.9rem;
+}
+
+/* Decorative elements */
+.autumn-element {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.6;
+}
+
+.autumn-leaf-1 {
+    top: 20%;
+    left: 5%;
+    width: 100px;
+    height: 100px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,10 C70,10 90,30 90,50 C90,70 70,90 50,90 C30,90 10,70 10,50 C10,30 30,10 50,10 Z" fill="%238B2E15" opacity="0.3" /></svg>');
+    animation: float 15s ease-in-out infinite alternate;
+}
+
+.autumn-leaf-2 {
+    top: 40%;
+    right: 8%;
+    width: 80px;
+    height: 80px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 C40,5 60,5 80,20 C95,40 95,60 80,80 C60,95 40,95 20,80 C5,60 5,40 20,20 Z" fill="%23D9913D" opacity="0.3" /></svg>');
+    animation: float 18s ease-in-out infinite alternate-reverse;
+}
+
+.autumn-leaf-3 {
+    bottom: 30%;
+    left: 15%;
+    width: 120px;
+    height: 120px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,10 C25,10 10,25 10,50 C10,75 25,90 50,90 C75,90 90,75 90,50 C90,25 75,10 50,10 Z" fill="%237D8C5C" opacity="0.2" /></svg>');
+    animation: float 20s ease-in-out infinite alternate;
+}
+
+.coffee-cup {
+    bottom: 40%;
+    right: 10%;
+    width: 60px;
+    height: 60px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30,30 L30,70 C30,80 40,90 50,90 C60,90 70,80 70,70 L70,30 L30,30 Z M70,40 L80,40 C85,40 90,45 90,50 C90,55 85,60 80,60 L70,60 L70,40 Z" fill="%23A67C52" opacity="0.4" /></svg>');
+    animation: float 12s ease-in-out infinite alternate-reverse;
+}
+
+/* Animation keyframes */
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate(10px, -10px) rotate(5deg);
+    }
+    100% {
+        transform: translate(-10px, 10px) rotate(-5deg);
+    }
+}
+
+/* Parallax classes */
+.parallax, .parallax-deep, .parallax-shallow {
+    transition: transform 0.1s ease-out;
+}
+
+/* Reveal animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Text colors */
+.accent-color-1 {
+    color: var(--accent-color-1);
+}
+
+.accent-color-2 {
+    color: var(--accent-color-2);
+}
+
+.accent-color-3 {
+    color: var(--accent-color-3);
+}
+
+/* Floating text */
+.floating-text {
+    display: inline-block;
+    position: relative;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    .title {
+        font-size: 2.5rem;
+        word-wrap: break-word;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .dh-logo img {
+        width: 80px;
+    }
+    
+    .logo {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .lyric-line {
+        font-size: 1.1rem;
+        word-wrap: break-word;
+    }
+    
+    .lyric-chorus {
+        font-size: 1.2rem;
+        word-wrap: break-word;
+    }
+    
+    .lyric-fragment {
+        font-size: 1rem;
+        padding: 8px 15px;
+        max-width: 90%;
+    }
+    
+    .fragment-left, .fragment-right {
+        bottom: 15px;
+    }
+    
+    .warm-quote {
+        font-size: 1.5rem;
+        padding: 0 15px;
+    }
+    
+    .video-container iframe {
+        height: 250px;
+        max-width: 100%;
+    }
+    
+    .form-group {
+        flex-direction: column;
+    }
+
+    .bandcamp-text {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+    
+    .dh-logo {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 20px;
+    }
+    
+    .logo {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .links-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .link-item {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+    
+    .lyric-fragment {
+        position: relative;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 1rem auto;
+        max-width: 90%;
+    }
+    
+    .video-container iframe {
+        height: 200px;
+    }
+
+    .lyrics-container {
+        padding: 1rem;
+    }
+
+    .newsletter-form {
+        padding: 1.5rem;
+        margin: 0 10px;
+    }
+
+    .video-title {
+        font-size: 1.5rem;
+    }
+
+    .bandcamp-text {
+        font-size: 1rem;
+    }
+}
